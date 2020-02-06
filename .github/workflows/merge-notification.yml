@@ -1,0 +1,14 @@
+name: Merge Notifications
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Slack notification
+      run: curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" -X POST ${{secrets.SLACK_WEBHOOK}}
