@@ -13,15 +13,14 @@ jobs:
     - name: Slack notification
       if: github.event.pull_request.merged == true
       run: |
-        curl -d '{\
-          "text": "${{  }} just merged ${{ github.event.pull_request.title }} (${{ github.head_ref }}) into ${{ github.event.pull_request.base.repo.name }}!"}' \
-          "icon_emoji": ":leftshark:", \
+        curl -d '{ "icon_emoji": ":leftshark:", \
           "blocks": [ \
             { \
               "type": "section", \
               "fields": [ \
-                { "type": "mrkdwn", "text": "*User:*\n${{ github.event.pull_request.user.login }}" } \
-                { "type": "mrkdwn", "text": "*User:*\n${{ github.event.pull_request.user.login }}" } \
+                { "type": "mrkdwn", "text": "*Repo:*\n${{ github.event.pull_request.base.repo.name }}" }, \
+                { "type": "mrkdwn", "text": "*User:*\n${{ github.event.pull_request.user.login }}" }, \
+                { "type": "mrkdwn", "text": "*Branch:*\n${{ github.head_ref }}" } \
               ]\
             }\
           ]\
