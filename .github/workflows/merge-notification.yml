@@ -13,4 +13,4 @@ jobs:
     - name: Slack notification
       if: github.event.pull_request.merged == true
       run: |
-        curl -d '{"text": "${{ github.event.pull_request.user.login }} just merged ${{ github.head_ref }}!"}' -H "Content-Type: application/json" -X POST ${{secrets.SLACK_WEBHOOK}}
+        curl -d '{"text": "${{ github.event.pull_request.user.login }} just merged ${{ github.event.pull_request.title }} (${{ github.head_ref }}) into ${{ github.event.pull_request.base.repo.name }}!"}' -H "Content-Type: application/json" -X POST ${{secrets.SLACK_WEBHOOK}}
