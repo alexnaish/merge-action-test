@@ -13,17 +13,4 @@ jobs:
     - name: Slack notification
       if: github.event.pull_request.merged == true
       run: |
-        curl -d '{ "icon_emoji": ":leftshark:", \
-          "blocks": [ \
-            { \
-              "type": "section", \
-              "fields": [ \
-                { "type": "mrkdwn", "text": "*Repo:*\n${{ github.event.pull_request.base.repo.name }}" }, \
-                { "type": "mrkdwn", "text": "*User:*\n${{ github.event.pull_request.user.login }}" }, \
-                { "type": "mrkdwn", "text": "*Branch:*\n${{ github.head_ref }}" } \
-              ]\
-            }\
-          ]\
-        }'\ 
-        -H "Content-Type: application/json" \
-        -X POST ${{secrets.SLACK_WEBHOOK}};
+        curl -d '{ "icon_emoji": ":leftshark:", "blocks": [{ "type": "section", "fields": [{ "type": "mrkdwn", "text": "*Repo:*\n${{ github.event.pull_request.base.repo.name }}" }, { "type": "mrkdwn", "text": "*User:*\n${{ github.event.pull_request.user.login }}" }, { "type": "mrkdwn", "text": "*Branch:*\n${{ github.head_ref }}" } ] } ]}' -H "Content-Type: application/json"  -X POST ${{secrets.SLACK_WEBHOOK}};
