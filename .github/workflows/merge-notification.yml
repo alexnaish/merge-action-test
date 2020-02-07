@@ -1,7 +1,8 @@
-name: Merge Notifications
+name: Merge Notification
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - master
 
@@ -9,7 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
     - name: Slack notification
       run: |
         curl -d '{"text": "${{ github.author }} just merged ${{ github.head_ref }}!"}' -H "Content-Type: application/json" -X POST ${{secrets.SLACK_WEBHOOK}}
